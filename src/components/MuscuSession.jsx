@@ -1,5 +1,6 @@
 import { M } from '../data/muscu.js';
 import { mParams, restSeconds } from '../lib/plan.js';
+import ExerciseFigure from './ExerciseFigure.jsx';
 
 export default function MuscuSession({ k, w, s, update, startTimer, inModal }) {
   const m = M[k], mp = mParams(w);
@@ -42,6 +43,7 @@ export default function MuscuSession({ k, w, s, update, startTimer, inModal }) {
           <div key={kid} className={'ex' + (x.legs ? ' legs' : '')}>
             <div className="exh">
               <div className="exn">{i + 1}</div>
+              {x.fig && <div className="figbox"><ExerciseFigure id={x.fig} /></div>}
               <div className="exb">
                 <h4>{x.n}{x.prio ? <span title="Exercice prioritaire" style={{ color: 'var(--gold)', marginLeft: 6 }}>★</span> : null}</h4>
                 <div className="meta">

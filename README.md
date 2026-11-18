@@ -6,7 +6,7 @@ Application React (Vite), sans backend : tout est sauvegardé dans le navigateur
 ## Fonctionnalités
 
 - **Semaine** : planning sur 12 semaines (Base → Développement → Spécifique → Affûtage), semaines allégées S4 et S8, séances à cocher.
-- **Muscu** : 3 séances (Poitrine/Triceps, Dos/Biceps, Épaules + jambes légères) adaptées à une machine multi-postes (tirage vertical, rowing bas, poulie réglable, poste à rouleaux), suivi des séries et des charges, minuteur de repos.
+- **Muscu** : illustration animée de chaque exercice, 3 séances (Poitrine/Triceps, Dos/Biceps, Épaules + jambes légères) adaptées à une machine multi-postes (tirage vertical, rowing bas, poulie réglable, poste à rouleaux), suivi des séries et des charges, minuteur de repos.
 - **Course** : zones d'entraînement calculées par la méthode VDOT (Jack Daniels) à partir des records 10 km et semi. Tout le programme se recalcule quand on change les chronos.
 - **Nutrition** : ≈ 2 950 kcal / 160 g de protéines sans compléments, quantités en grammes, repas marocains avec alternatives, suivi du poids et du tour de taille.
 - **Objectif & science** : objectif réaliste, synthèse des méta-analyses récentes, suivi et sources.

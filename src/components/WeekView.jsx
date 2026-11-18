@@ -5,7 +5,7 @@ import Paced from './Paced.jsx';
 export default function WeekView({ s, update, P, onOpen }) {
   const c = currentWeekDay(s.start);
   const w = s.week, d = W[w - 1], p = weekProgress(w, P, s.done);
-  const kms = Math.round((d.e + (d.sl[0] || 60) + 45) / 6.4);
+  const kms = Math.round((d.e + (typeof d.sl === 'number' ? d.sl : 65) + 45) / 6.6);
   const ss = weekSessions(w, P);
   return (
     <section className="view on">
@@ -15,15 +15,15 @@ export default function WeekView({ s, update, P, onOpen }) {
           return (
             <button key={n} className={'wk' + (n === w ? ' on' : '') + (n === c.w && !c.before ? ' now' : '')} onClick={() => update({ week: n })}>
               <div className="n">S{n}</div>
-              <div className="p">{wd.dl ? 'Allèg.' : wd.ph.slice(0, 5)}</div>
+              <div className="p">{wd.ph === 'Test' ? 'Test' : wd.dl ? 'Allèg.' : wd.ph.slice(0, 6)}</div>
               <div className="bar"><i style={{ width: (pr.n / pr.t) * 100 + '%' }} /></div>
             </button>
           );
         })}
       </div>
       <div className="phase">
-        <div><span className="tag">{d.dl ? 'Semaine allégée' : d.ph}</span><h2 style={{ marginTop: 6 }}>Semaine {w}</h2></div>
-        <p>{d.dl ? 'Récupération active : on réduit le volume pour assimiler le travail des 3 semaines précédentes. ' : ''}{PH[d.ph]}</p>
+        <div><span className="tag">{d.ph}</span><h2 style={{ marginTop: 6 }}>Semaine {w}</h2></div>
+        <p>{PH[d.ph]}</p>
         <div className="prog"><b>{p.n}/{p.t}</b><span>séances faites · ~{kms} km</span></div>
       </div>
       <div className="days">
@@ -47,7 +47,7 @@ export default function WeekView({ s, update, P, onOpen }) {
         <span><i style={{ background: 'var(--lift)' }} />Musculation</span>
         <span><i style={{ background: 'var(--run)' }} />Course</span>
         <span><i style={{ background: 'var(--rest)' }} />Repos / optionnel</span>
-        <span>Touche une séance pour le détail et la cocher.</span>
+        <span>Touche une séance pour le détail et la cocher. Course et muscu ne tombent jamais dans la même demi-journée.</span>
       </div>
     </section>
   );

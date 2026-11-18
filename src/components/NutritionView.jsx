@@ -1,15 +1,7 @@
 import { useState } from 'react';
-import { MEALS, NT } from '../data/nutrition.js';
+import { MEALS, NT, DAILY, EQUIV, NO_ADDITIVES } from '../data/nutrition.js';
 import { todayStr, autoDayType } from '../lib/plan.js';
 import WeightTracker from './WeightTracker.jsx';
-
-const PREPOST = [
-  ['Muscu après le travail', 'Collation pré-séance à 16 h 30 (avoine + lait + miel, ou sandwich thon + banane). 500 ml d\'eau avant, une gourde pendant. Dîner protéiné dans l\'heure après.', '--lift'],
-  ['Footing après Al Fajr', 'Grand verre d\'eau. À jeun possible si c\'est facile et moins de 50′.', '--run'],
-  ['Fractionné ou seuil', '2–3 dattes + eau 20–30′ avant. Si c\'est le soir : le goûter de 16 h 30 fait office de pré-run.', '--run'],
-  ['Sortie longue (dimanche)', '3 dattes avant, eau + 3–4 dattes à emporter au-delà de 75′. Petit-déjeuner complet en rentrant.', '--run'],
-  ['Après chaque séance', 'Protéines + glucides dans l\'heure : œufs + pain, ou harira + poisson, ou shaker + banane.', '--gold'],
-];
 
 export default function NutritionView({ s, update }) {
   const [type, setType] = useState(autoDayType());
@@ -19,15 +11,16 @@ export default function NutritionView({ s, update }) {
   const day = todayStr();
   const eaten = ms.reduce((a, [id, m]) => a + (s.meals[day + ':' + type + ':' + id] ? m.k : 0), 0);
   const toggle = (key) => update((prev) => ({ meals: { ...prev.meals, [key]: !prev.meals[key] } }));
+  const dTot = DAILY.reduce((a, r) => [a[0] + r[2], a[1] + r[3]], [0, 0]);
 
   return (
     <section className="view on">
-      <h2 className="sectitle">Nutrition — prise de muscle propre</h2>
-      <p className="secsub">Objectif : +200 à 300 kcal au-dessus de ta dépense pour construire du muscle sans prendre de ventre. Pas de régime : à 71 kg, tu dois d'abord construire. Choisis le type de journée, coche tes repas, et touche « Alternatives » pour varier.</p>
+      <h2 className="sectitle">Nutrition sans compléments</h2>
+      <p className="secsub">Environ 3 000 kcal et 160 g de protéines par jour, uniquement avec de vrais aliments : environ 300 kcal au-dessus de ta dépense, le bon écart pour prendre du muscle sans trop de gras. Choisis le type de journée, coche tes repas, et ouvre « Alternatives » pour varier.</p>
       <div className="mtabs">
         {Object.entries(NT).map(([k, v]) => (
           <button key={k} className={'mtab' + (k === type ? ' on' : '')} onClick={() => setType(k)}>
-            {v.lbl}{k === autoDayType() ? " · aujourd'hui" : ''}<small>{v.days}</small>
+            {v.lbl}{k === autoDayType() ? " · aujourd'hui" : ''}<small>{v.days} · {v.target}</small>
           </button>
         ))}
       </div>
@@ -58,18 +51,25 @@ export default function NutritionView({ s, update }) {
           );
         })}
       </div>
+
+      <div className="card" style={{ marginTop: 14 }}>
+        <h3>🛒 Les quantités pour une journée d'entraînement</h3>
+        <p style={{ color: 'var(--mut)', fontSize: 13.5, marginBottom: 8 }}>Poids des aliments, valeurs moyennes des tables nutritionnelles. Dimanche : riz réduit à 60 g et pas de pommes de terre.</p>
+        <table className="pred"><tbody>
+          <tr><th>Aliment</th><th>Quantité</th><th>kcal</th><th>Protéines</th></tr>
+          {DAILY.map((r) => <tr key={r[0]}><td>{r[0]}</td><td>{r[1]}</td><td className="num">{r[2]}</td><td className="num">{r[3]} g</td></tr>)}
+          <tr><td><b>Total</b></td><td /><td className="num" style={{ color: 'var(--gold)' }}>≈ {dTot[0]}</td><td className="num" style={{ color: 'var(--gold)' }}>≈ {dTot[1]} g</td></tr>
+        </tbody></table>
+      </div>
+
       <div className="grid2" style={{ marginTop: 14 }}>
-        <div className="card"><h3>⚡ Pré-workout & post-workout</h3>
-          {PREPOST.map((b) => (
-            <div key={b[0]} className="block" style={{ '--c': `var(${b[2]})` }}><div className="k">{b[0]}</div><div className="v" style={{ fontSize: 14 }}>{b[1]}</div></div>
-          ))}
+        <div className="card"><h3>🔁 Équivalences</h3>
+          <ul>{EQUIV.map(([a, b]) => <li key={a}><b>{a}</b> = {b}</li>)}</ul>
+          <p style={{ color: 'var(--mut)', fontSize: 13, marginTop: 10 }}>Pour varier sans recalculer.</p>
         </div>
-        <div className="card"><h3>💊 Compléments</h3><ul>
-          <li><b>Créatine monohydrate</b> : 5 g par jour, tous les jours, à n'importe quel moment.</li>
-          <li><b>Whey</b> (optionnel) : pratique si tu n'atteins pas 140 g de protéines. 1 dose = 25 g de protéines.</li>
-          <li><b>Caféine</b> : 1 café 30–45′ avant une séance difficile. Pas après 16 h–17 h, ton sommeil avant Al Fajr compte plus.</li>
-          <li>Pas besoin de « pre-workout » en poudre : la collation de 16 h 30 et un café font le même travail.</li>
-        </ul></div>
+        <div className="card"><h3>🌿 Sans additifs, concrètement</h3>
+          <ul>{NO_ADDITIVES.map((l) => <li key={l}>{l}</li>)}</ul>
+        </div>
       </div>
       <WeightTracker s={s} update={update} />
     </section>

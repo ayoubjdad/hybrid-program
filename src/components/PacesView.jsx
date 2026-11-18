@@ -22,8 +22,19 @@ export default function PacesView({ s, update, P }) {
   };
   return (
     <section className="view on">
-      <h2 className="sectitle">Tes allures d'entraînement</h2>
-      <p className="secsub">Calculées à partir de tes records (méthode VDOT de Jack Daniels). Mets à jour tes chronos après un test : toutes les séances du programme s'adaptent automatiquement.</p>
+      <h2 className="sectitle">Course : plan et allures</h2>
+      <p className="secsub">Trois sorties, 20 à 28 km par semaine, dont environ 80 % en endurance facile : assez pour garder et améliorer ton cardio sans manger la récupération de la muscu. Allures calculées à partir de tes records (méthode VDOT) ; mets à jour tes chronos après le test de la semaine 12.</p>
+      <div className="card" style={{ marginBottom: 14 }}>
+        <h3>🏃 Ta semaine de course</h3>
+        <table className="pred"><tbody>
+          <tr><th>Séance</th><th>Contenu</th><th>Progression</th></tr>
+          <tr><td>Lundi, footing facile</td><td>35–45 min à {P.E}/km + 4 lignes droites de 20 s</td><td>+5 min toutes les 4 semaines, plafond 50 min</td></tr>
+          <tr><td>Mercredi, semaines impaires</td><td>15 min d'échauffement, 3 × 8 min à {P.T}/km (récup 2 min trot), 10 min retour au calme</td><td>3 × 10 min à partir de la semaine 5</td></tr>
+          <tr><td>Mercredi, semaines paires</td><td>15 min d'échauffement, 6 × 2 min à {P.I}/km (récup 2 min trot), 10 min retour au calme</td><td>8 × 2 min à partir de la semaine 6</td></tr>
+          <tr><td>Vendredi, sortie longue</td><td>50 min à {P.E}/km</td><td>+5 min toutes les 2 semaines, plafond 75 min</td></tr>
+        </tbody></table>
+        <p style={{ color: 'var(--mut)', fontSize: 13, marginTop: 10 }}>Avec la prise de poids, ralentir de 5 à 10 s/km en footing est normal : cours aux sensations, tu dois pouvoir parler.</p>
+      </div>
       <div className="card">
         <div className="calc">
           <div className="field"><label>Record 10 km</label><input value={a} onChange={(e) => setA(e.target.value)} placeholder="54:00" /></div>

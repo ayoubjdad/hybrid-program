@@ -8,12 +8,13 @@ import MuscuView from './components/MuscuView.jsx';
 import PacesView from './components/PacesView.jsx';
 import NutritionView from './components/NutritionView.jsx';
 import TipsView from './components/TipsView.jsx';
+import ObjectifView from './components/ObjectifView.jsx';
 import SessionModal from './components/SessionModal.jsx';
 import RestTimer from './components/RestTimer.jsx';
 
 const TABS = [
-  ['semaine', '📅 Semaine'], ['muscu', '🏋️ Muscu'], ['allures', '⏱️ Allures'],
-  ['nutrition', '🍽️ Nutrition'], ['conseils', '💡 Conseils'],
+  ['semaine', '📅 Semaine'], ['muscu', '🏋️ Muscu'], ['course', '🏃 Course'],
+  ['nutrition', '🍽️ Nutrition'], ['objectif', '🎯 Objectif & science'], ['conseils', '💡 Conseils'],
 ];
 
 export default function App() {
@@ -43,7 +44,8 @@ export default function App() {
       <main className="wrap">
         {tab === 'semaine' && <WeekView {...props} onOpen={(day, id) => setOpen({ day, id })} />}
         {tab === 'muscu' && <MuscuView {...props} />}
-        {tab === 'allures' && <PacesView {...props} />}
+        {tab === 'course' && <PacesView {...props} />}
+        {tab === 'objectif' && <ObjectifView />}
         {tab === 'nutrition' && <NutritionView {...props} />}
         {tab === 'conseils' && <TipsView />}
         <footer>Programme indicatif. En cas de douleur articulaire ou tendineuse qui dure plus de 3 jours, lève le pied et consulte un professionnel de santé.</footer>

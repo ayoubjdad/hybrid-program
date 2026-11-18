@@ -18,9 +18,9 @@ export default function WeightTracker({ s, update }) {
   if (ws.length >= 3) {
     const a = ws[ws.length - 3], b = ws[ws.length - 1];
     const days = (new Date(b.d) - new Date(a.d)) / 86400000, dw = b.w - a.w;
-    const ta = track.filter((e) => e.t), dt = ta.length >= 2 ? ta[ta.length - 1].t - ta[0].t : 0;
-    advice = days >= 12 && dw <= 0.1 ? <><b>Poids stable depuis 2 semaines</b> : ajoute ~150 kcal (½ khobz ou un bol d'avoine en plus).</>
-      : dt >= 2 ? <><b>Tour de taille en hausse</b> : retire ~150 kcal (moins de pain, thé moins sucré).</>
+    const ta = track.filter((e) => e.t), dt = ta.length >= 2 ? ta[ta.length - 1].t - ta[ta.length - 2].t : 0;
+    advice = days >= 19 && dw <= 0.1 ? <><b>Poids stable depuis 3 semaines</b> : ajoute ~150 kcal (40 g de riz sec, ou 1 banane + 10 g d'amandes).</>
+      : dt >= 2 ? <><b>Tour de taille en hausse rapide</b> : retire ~150 kcal, en commençant par le pain.</>
       : <><b>Bonne trajectoire</b> : garde les mêmes quantités.</>;
   }
 
@@ -47,7 +47,7 @@ export default function WeightTracker({ s, update }) {
   return (
     <div className="card" style={{ marginTop: 14 }}>
       <h3>📈 Suivi poids & tour de taille</h3>
-      <p style={{ color: 'var(--mut)', fontSize: 13.5, marginBottom: 12 }}>Une mesure par semaine, le matin à jeun. Tour de taille au niveau du nombril. Cible : +0,3 à 0,5 kg par mois avec un tour de taille stable.</p>
+      <p style={{ color: 'var(--mut)', fontSize: 13.5, marginBottom: 12 }}>Une mesure par semaine, le matin à jeun. Tour de taille au niveau du nombril. Cible : +0,5 à 0,8 kg par mois, tour de taille +1 cm maximum par trimestre.</p>
       <div className="calc">
         <div className="field"><label>Date</label><input type="date" value={d} onChange={(e) => setD(e.target.value)} style={{ colorScheme: 'dark' }} /></div>
         <div className="field"><label>Poids (kg)</label><input inputMode="decimal" placeholder="71" value={w} onChange={(e) => setW(e.target.value)} /></div>

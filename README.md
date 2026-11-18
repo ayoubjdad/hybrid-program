@@ -1,14 +1,15 @@
 # 🏋️ × 🏃 Programme Hybride — 12 semaines
 
-Programme personnel **musculation + course à pied** sur 12 semaines, avec plan nutrition.
+Programme hybride **musculation + course à pied** orienté prise de muscle (objectif physique type Anthony Joshua), avec nutrition 100 % aliments sans compléments, basé sur la recherche récente.
 Application React (Vite), sans backend : tout est sauvegardé dans le navigateur (`localStorage`).
 
 ## Fonctionnalités
 
 - **Semaine** : planning sur 12 semaines (Base → Développement → Spécifique → Affûtage), semaines allégées S4 et S8, séances à cocher.
 - **Muscu** : 3 séances (Poitrine/Triceps, Dos/Biceps, Épaules + jambes légères) adaptées à une machine multi-postes (tirage vertical, rowing bas, poulie réglable, poste à rouleaux), suivi des séries et des charges, minuteur de repos.
-- **Allures** : zones d'entraînement calculées par la méthode VDOT (Jack Daniels) à partir des records 10 km et semi. Tout le programme se recalcule quand on change les chronos.
-- **Nutrition** : ≈ 2 800 kcal / 150 g de protéines, repas marocains avec alternatives, pré/post-workout, compléments, suivi du poids et du tour de taille.
+- **Course** : zones d'entraînement calculées par la méthode VDOT (Jack Daniels) à partir des records 10 km et semi. Tout le programme se recalcule quand on change les chronos.
+- **Nutrition** : ≈ 2 950 kcal / 160 g de protéines sans compléments, quantités en grammes, repas marocains avec alternatives, suivi du poids et du tour de taille.
+- **Objectif & science** : objectif réaliste, synthèse des méta-analyses récentes, suivi et sources.
 - **Conseils** : course après Al Fajr, progression, signaux d'alerte, calendrier.
 
 ## Lancer en local
